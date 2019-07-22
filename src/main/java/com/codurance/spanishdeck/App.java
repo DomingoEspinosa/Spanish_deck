@@ -1,12 +1,15 @@
 package com.codurance.spanishdeck;
 
+import com.codurance.spanishdeck.baraja.Baraja;
+import com.codurance.spanishdeck.baraja.FrenchBaraja;
+
 public class App {
     public static void main(String[] args) {
         //Creamos la baraja
-        Baraja b = new Baraja();
+        Baraja b = new FrenchBaraja();
 
         //Mostramos las cartas disponibles (40)
-        System.out.println("Hay "+b.cartasDisponible()+" cartas disponibles");
+        System.out.println("Hay "+b.availableDecks()+" cartas disponibles");
 
         //Saco una carta
         b.nextDeck();
@@ -15,11 +18,11 @@ public class App {
         b.giveCards(5);
 
         //Mostramos las cartas disponibles (34)
-        System.out.println("Hay "+b.cartasDisponible()+" cartas disponibles");
+        System.out.println("Hay "+b.availableDecks()+" cartas disponibles");
 
         System.out.println("Cartas sacadas de momento");
 
-        b.cartasMonton();
+        b.pillOfDecks();
 
 
         //Barajamos de nuevo

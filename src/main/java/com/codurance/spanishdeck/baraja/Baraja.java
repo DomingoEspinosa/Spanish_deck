@@ -1,45 +1,34 @@
-package com.codurance.spanishdeck;
+package com.codurance.spanishdeck.baraja;
+
+import com.codurance.spanishdeck.Deck;
 
 import java.util.Random;
 
-public class Baraja {
-    private Deck deck[];
-    private int nextDeck;
+public abstract class Baraja<T> {
+    protected Deck<T> deck[];
+    protected int nextDeck;
+    protected int numberOfDeck;
+    protected int numberOfDeckBySuit;
 
-    public static final int NUMBER_OF_DECK = 40;
+    /*public static final int numberOfDeck = 40;
+    public static final int numberOfDeckBySuit = 12;*/
 
     public Baraja() {
-        this.deck = new Deck[40];
         this.nextDeck = 0;
-        createSpanishDeck();
-        shuffle();
     }
+
+    abstract void createDeck();
 
     public void shuffle() {
         int posRandom;
         Deck deckActual;
         for (int i = 0; i < deck.length; i++) {
-            posRandom = getRandomNumberInRange(0, NUMBER_OF_DECK - 1);
+            posRandom = getRandomNumberInRange(0, numberOfDeck - 1);
             deckActual = deck[i];
             deck[i] = deck[posRandom];
             deck[posRandom] = deckActual;
         }
         this.nextDeck = 0;
-    }
-
-    private void createSpanishDeck() {
-        String[] suits = Deck.SUITS;
-        for (int i = 0; i < suits.length; i++) {
-            for (int j = 0; j < Deck.NUMBER_OF_CARDS; j++) {
-                if (!(j == 7 || j == 8)) {
-                    if (j >= 9) {
-                        deck[((i * (Deck.NUMBER_OF_CARDS - 2)) + (j - 2))] = new Deck(j + 1, suits[i]);
-                    } else {
-                        deck[((i * (Deck.NUMBER_OF_CARDS - 2)) + j)] = new Deck(j + 1, suits[i]);
-                    }
-                }
-            }
-        }
     }
 
     private static int getRandomNumberInRange(int min, int max) {
@@ -51,7 +40,7 @@ public class Baraja {
 
     public Deck nextDeck(){
         Deck c = null;
-        if (this.nextDeck == NUMBER_OF_DECK){
+        if (this.nextDeck == numberOfDeck){
             System.out.println("Not exist more cards");
         } else {
             c = deck[nextDeck++];
@@ -61,11 +50,11 @@ public class Baraja {
     }
 
     public int deckAvailable(){
-        return NUMBER_OF_DECK - nextDeck;
+        return numberOfDeck - nextDeck;
     }
 
     public Deck[] giveCards(int numberOfCars){
-        if (numberOfCars > NUMBER_OF_DECK){
+        if (numberOfCars > numberOfDeck){
             System.out.println("Te has pasado");
         } else if (deckAvailable() < numberOfCars) {
             System.out.println("No hay cartas suficientes");
@@ -79,16 +68,13 @@ public class Baraja {
         return null;
     }
 
-    public int cartasDisponible() {
-        return NUMBER_OF_DECK - nextDeck;
+    public int availableDecks() {
+        return numberOfDeck - nextDeck;
     }
 
-    /**
-     * Muestro las cartas que ya han salido
-     */
-    public void cartasMonton() {
+    public void pillOfDecks() {
 
-        if (cartasDisponible() == NUMBER_OF_DECK) {
+        if (availableDecks() == numberOfDeck) {
             System.out.println("No se ha sacado ninguna carta");
         } else {
             //Recorro desde 0 a la posSiguienteCarta
@@ -99,12 +85,9 @@ public class Baraja {
 
     }
 
-    /**
-     * Muestro las cartas que aun no han salido
-     */
-    public void mostrarBaraja() {
+    public void showDecks() {
 
-        if (cartasDisponible() == 0) {
+        if (availableDecks() == 0) {
             System.out.println("No hay cartas que mostrar");
         } else {
             for (int i = nextDeck; i < deck.length; i++) {

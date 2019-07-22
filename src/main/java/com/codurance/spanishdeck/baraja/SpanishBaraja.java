@@ -20,8 +20,7 @@ public class SpanishBaraja extends Baraja {
         super.shuffle();
     }
 
-    @Override
-    void createDeck() {
+    private void createDeck() {
         this.deck = new Deck[numberOfDeck];
         SpanishBarajaSuits[] spanishBarajaSuits = SpanishBarajaSuits.values();
 

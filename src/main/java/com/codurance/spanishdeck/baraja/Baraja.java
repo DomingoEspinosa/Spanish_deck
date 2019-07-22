@@ -4,20 +4,15 @@ import com.codurance.spanishdeck.Deck;
 
 import java.util.Random;
 
-public abstract class Baraja<T> {
-    protected Deck<T> deck[];
+public class Baraja implements IBaraja {
+    protected Deck deck[];
     protected int nextDeck;
     protected int numberOfDeck;
     protected int numberOfDeckBySuit;
 
-    /*public static final int numberOfDeck = 40;
-    public static final int numberOfDeckBySuit = 12;*/
-
     public Baraja() {
         this.nextDeck = 0;
     }
-
-    abstract void createDeck();
 
     public void shuffle() {
         int posRandom;

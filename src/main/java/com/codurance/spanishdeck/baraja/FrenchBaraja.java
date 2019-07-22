@@ -4,7 +4,7 @@ import com.codurance.spanishdeck.Deck;
 
 import static com.codurance.spanishdeck.baraja.FrenchBarajaSuits.*;
 
-public class FrenchBaraja extends Baraja {
+public class FrenchBaraja extends Baraja implements IBaraja {
 
     public FrenchBaraja() {
         super();
@@ -14,8 +14,7 @@ public class FrenchBaraja extends Baraja {
         super.shuffle();
     }
 
-    @Override
-    void createDeck() {
+    private void createDeck() {
         this.deck = new Deck[numberOfDeck];
         FrenchBarajaSuits frenchBarajaSuits[] = values();
 

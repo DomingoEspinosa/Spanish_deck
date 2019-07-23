@@ -4,7 +4,7 @@ import com.codurance.spanishdeck.Deck;
 
 import static com.codurance.spanishdeck.baraja.FrenchBarajaSuits.*;
 
-public class FrenchBaraja extends Baraja implements IBaraja {
+public class FrenchBaraja extends Baraja {
 
     public FrenchBaraja() {
         super();
